@@ -6,7 +6,7 @@ on:
   # Run automatically on main pushes
   push:
     branches:
-      - master
+      - main
     paths:
       - 'shaders/**.glsl'
   # Or run on manual trigger
@@ -24,7 +24,6 @@ jobs:
   # Gets all the different files
   getChanges:
     runs-on: ubuntu-latest
-    id: getChanges
     # Return the files as outputs
     outputs:
       FILES: ${{ steps.prep.outputs.FILES }}
@@ -54,7 +53,6 @@ jobs:
   createRenders:
     runs-on: ubuntu-latest
     needs: getChanges
-    id: createRenders
     # Will run once for each file
     strategy:
       matrix:
@@ -90,7 +88,6 @@ jobs:
   # Renders uploaded have this URL schema https://tmpfiles.org/3436989/sun.png
   uploadRenders:
     runs-on: ubuntu-latest
-    id: uploadRenders
     needs: [createRenders, getChanges]
     # Will run once for each file
     strategy:
@@ -117,7 +114,6 @@ jobs:
   notifyWithEmail:
     runs-on: ubuntu-latest
     needs: uploadRenders
-    id: notifyWithEmail
     # Will run once for each generated URL
     strategy:
       matrix:
