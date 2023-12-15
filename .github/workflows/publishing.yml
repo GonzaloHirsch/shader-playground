@@ -135,4 +135,4 @@ jobs:
       # Send the actual email
       - name: 'Send email payload'
         run: |
-          aws ses send-raw-email --region ${{ secrets.AWS_REGION }} --cli-binary-format raw-in-base64-out --raw-message file://$FILENAME
+          aws ses send-raw-email --region ${{ secrets.AWS_REGION }} --tags Name=app,Value=appshaders.gonzalohirsch.com --cli-binary-format raw-in-base64-out --raw-message file://$FILENAME
