@@ -45,6 +45,9 @@ jobs:
       - name: 'Prepare job outputs'
         id: prep
         run: |
+          echo "${{steps.changes.outputs.src_files}}"
+          echo "${{steps.changes.outputs.src}}"
+          echo "${{steps.changes.outputs}}"
           if [[ '${{steps.changes.outputs.src}}' -eq 'true' ]]; then
             echo "FILES=${{steps.changes.outputs.src_files}}" >> $GITHUB_OUTPUT
           fi
