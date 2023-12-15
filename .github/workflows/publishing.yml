@@ -50,6 +50,8 @@ jobs:
           echo "${{steps.changes.outputs}}"
           if [[ '${{steps.changes.outputs.src}}' -eq 'true' ]]; then
             echo "FILES=${{steps.changes.outputs.src_files}}" >> $GITHUB_OUTPUT
+          else
+            echo "FILES=[]" >> $GITHUB_OUTPUT
           fi
 
   # Creates the different renders
