@@ -47,7 +47,8 @@ jobs:
         id: prep
         run: |
           if [[ '${{steps.changes.outputs.shaders}}' -eq 'true' ]]; then
-            echo "FILES=${{steps.changes.outputs.shaders_files}}" >> $GITHUB_OUTPUT
+            ESCAPED_FILES=$(echo '${{steps.changes.outputs.shaders_files}}' | sed -e 's/"/\\"/g')
+            echo "FILES=$ESCAPED_FILES" >> $GITHUB_OUTPUT
           else
             echo "Defaulting to no files..."
             echo "FILES=[]" >> $GITHUB_OUTPUT
