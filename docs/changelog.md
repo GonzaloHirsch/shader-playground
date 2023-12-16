@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.2...v1.0.3) (2023-12-16)
+
+
+### Bug Fixes
+
+* trigger for changes action ([92602c3](https://github.com/GonzaloHirsch/shader-playground/commit/92602c33ff38946a574d107ff705cf2125f8029e))
+
 ## [1.0.2](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.1...v1.0.2) (2023-12-16)
 
 
