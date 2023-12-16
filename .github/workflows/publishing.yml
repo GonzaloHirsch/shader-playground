@@ -85,13 +85,16 @@ jobs:
       - name: 'Installing dependencies'
         run: pip install vispy watchdog glfw Pillow imageio PyQt5
       - name: 'Installing Linux libraries'
-        run: sudo apt update && sudo apt upgrade && sudo apt install -y ffmpeg
+        run: |
+          sudo apt update && sudo apt upgrade && sudo apt install -y ffmpeg xvfb xorg-dev cmake qt5-qmake build-essential
+          Xvfb :1 -screen 0 1920x1080x16 &
+          export DISPLAY=:1
       # Possible render platforms eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
       # Don't work --> linuxfb, vnc, xcb, offscreen, wayland-xcomposite-egl, eglfs, wayland-egl, wayland, wayland-xcomposite-glx (better errors), webgl, minimal
       # Work -->
+      #export QT_QPA_PLATFORM=eglfs
       - name: 'Rendering the shader locally'
         run: |
-          export QT_QPA_PLATFORM=eglfs
           python3 ${{env.TARGET_REPO}}/shadertoy-render.py \
             --output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M \
             --vispy_use=egl --duration=30.0 ${{matrix.shader}}
