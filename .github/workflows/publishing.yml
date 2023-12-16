@@ -33,13 +33,14 @@ jobs:
         with:
           fetch-depth: 0
       # https://github.com/dorny/paths-filter
+      # Look out for changes in the shaders
       - name: 'Getting the changes'
         id: changes
         uses: dorny/paths-filter@v2
         with:
           filters: |
             shaders:
-              - 'shaders/**.glsl'
+              - added|modified: 'shaders/**.glsl'
           initial-fetch-depth: 1
           list-files: 'json'
       - name: 'Prepare job outputs'
