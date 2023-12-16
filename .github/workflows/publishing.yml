@@ -1,6 +1,6 @@
 # Info on the action
 name: Automatic Publishing
-run-name: ${{ github.actor }} is automatically publishing 🚀
+run-name: ${{ github.actor }} is publishing 📸
 
 on:
   # Run automatically on main pushes
@@ -45,11 +45,8 @@ jobs:
       - name: 'Prepare job outputs'
         id: prep
         run: |
-          echo "${{steps.changes.outputs.src_files}}"
-          echo "${{steps.changes.outputs.src}}"
-          echo "${{steps.changes.outputs}}"
-          if [[ '${{steps.changes.outputs.src}}' -eq 'true' ]]; then
-            echo "FILES=${{steps.changes.outputs.src_files}}" >> $GITHUB_OUTPUT
+          if [[ '${{steps.changes.outputs.shaders}}' -eq 'true' ]]; then
+            echo "FILES=${{steps.changes.outputs.shaders_files}}" >> $GITHUB_OUTPUT
           else
             echo "Defaulting to no files..."
             echo "FILES=[]" >> $GITHUB_OUTPUT
