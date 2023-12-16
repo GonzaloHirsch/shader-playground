@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.7...v1.0.8) (2023-12-16)
+
+
+### Bug Fixes
+
+* exported variables ([096886f](https://github.com/GonzaloHirsch/shader-playground/commit/096886f60fdcede931e8aed1f2e293d8bedcbc9d))
+
 ## [1.0.7](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.6...v1.0.7) (2023-12-16)
 
 
