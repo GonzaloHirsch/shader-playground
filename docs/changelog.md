@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.3...v1.0.4) (2023-12-16)
+
+
+### Bug Fixes
+
+* escaping issues ([8fded0b](https://github.com/GonzaloHirsch/shader-playground/commit/8fded0bb9b710d6157f2dd160fd94fbc28a5423f))
+
 ## [1.0.3](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.2...v1.0.3) (2023-12-16)
 
 
