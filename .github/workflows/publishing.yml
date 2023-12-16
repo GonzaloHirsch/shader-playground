@@ -81,6 +81,8 @@ jobs:
           python-version: '3.10'
       - name: 'Installing dependencies'
         run: pip install vispy watchdog glfw Pillow imageio PyQt5
+      - name: 'Installing Linux libraries'
+        run: sudo apt update && sudo apt upgrade && sudo apt install -y ffmpeg
       - name: 'Rendering the shader locally'
         run: |
           python3 ${{env.TARGET_REPO}}/shadertoy-render.py \
