@@ -94,7 +94,7 @@ jobs:
         run: |
           python3 ${{env.TARGET_REPO}}/shadertoy-render.py \
             --output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M \
-            --duration=30.0 ${{matrix.shader}}
+            --vispy_use=egl --duration=30.0 ${{matrix.shader}}
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
