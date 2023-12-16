@@ -62,7 +62,7 @@ jobs:
   createRenders:
     runs-on: ubuntu-latest
     needs: getChanges
-    if: needs.getChanges.outputs.FILES > 0
+    if: needs.getChanges.outputs.TOTAL_FILES > 0
     # Will run once for each file
     strategy:
       matrix:
