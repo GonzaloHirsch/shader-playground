@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.9...v1.0.10) (2023-12-16)
+
+
+### Bug Fixes
+
+* condition in workflow ([1c94031](https://github.com/GonzaloHirsch/shader-playground/commit/1c9403168051b5f679fad245c54c61d1f6084590))
+
 ## [1.0.9](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.8...v1.0.9) (2023-12-16)
 
 
