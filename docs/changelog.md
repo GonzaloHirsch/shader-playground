@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.5...v1.0.6) (2023-12-16)
+
+
+### Bug Fixes
+
+* publishing path for cloning ([d7b5172](https://github.com/GonzaloHirsch/shader-playground/commit/d7b517221ee348ee0c6c50214a3892f56f4d12af))
+
 ## [1.0.5](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.4...v1.0.5) (2023-12-16)
 
 
