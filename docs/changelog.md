@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.8...v1.0.9) (2023-12-16)
+
+
+### Bug Fixes
+
+* publishing plugins ([d888af3](https://github.com/GonzaloHirsch/shader-playground/commit/d888af315d83f5a08584b4b215a9faadc1c7416b))
+
 ## [1.0.8](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.7...v1.0.8) (2023-12-16)
 
 
