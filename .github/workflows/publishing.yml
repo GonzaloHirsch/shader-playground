@@ -51,6 +51,7 @@ jobs:
           if [[ '${{steps.changes.outputs.src}}' -eq 'true' ]]; then
             echo "FILES=${{steps.changes.outputs.src_files}}" >> $GITHUB_OUTPUT
           else
+            echo "Defaulting to no files..."
             echo "FILES=[]" >> $GITHUB_OUTPUT
           fi
 
