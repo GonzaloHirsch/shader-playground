@@ -86,9 +86,12 @@ jobs:
         run: pip install vispy watchdog glfw Pillow imageio PyQt5
       - name: 'Installing Linux libraries'
         run: sudo apt update && sudo apt upgrade && sudo apt install -y ffmpeg
+      # Possible render platforms eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+      # Don't work --> linuxfb, vnc, xcb
+      # Work -->
       - name: 'Rendering the shader locally'
         run: |
-          export QT_QPA_PLATFORM=vnc
+          export QT_QPA_PLATFORM=wayland-xcomposite-egl
           python3 ${{env.TARGET_REPO}}/shadertoy-render.py \
             --output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M \
             --duration=30.0 ${{matrix.shader}}
