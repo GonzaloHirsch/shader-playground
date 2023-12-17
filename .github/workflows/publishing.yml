@@ -180,7 +180,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{steps.artifact_name.outputs.FILENAME}}_url
-          path: ${{steps.artifact_name.outputs.FILENAME}}.url
+          path: .
       # Update with version if release
       - name: 'Configure AWS Credentials'
         uses: aws-actions/configure-aws-credentials@v1
