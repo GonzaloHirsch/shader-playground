@@ -110,12 +110,12 @@ jobs:
         run: |
           FILE="${{matrix.shader}}"
           FULL_NAME=${FILE##*/}
-          FILE_NAME="${FULL_NAME%.*}"
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          FILENAME="${FULL_NAME%.*}"
+          echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{steps.artifact_name.outputs.FILE_NAME}}
+          name: ${{steps.artifact_name.outputs.FILENAME}}
           path: ${{matrix.shader}}.mp4
           retention-days: 7
 
@@ -136,12 +136,12 @@ jobs:
         run: |
           FILE="${{matrix.shader}}"
           FULL_NAME=${FILE##*/}
-          FILE_NAME="${FULL_NAME%.*}"
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          FILENAME="${FULL_NAME%.*}"
+          echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
       - name: 'Download Artifacts'
         uses: actions/download-artifact@v3
         with:
-          name: ${{steps.artifact_name.outputs.FILE_NAME}}
+          name: ${{steps.artifact_name.outputs.FILENAME}}
           path: ${{matrix.shader}}.mp4
       - name: 'Upload to temporary server'
         id: upload
@@ -149,12 +149,12 @@ jobs:
           RESPONSE=$(curl -F "file=@${{matrix.shader}}.mp4" https://tmpfiles.org/api/v1/upload)
           echo "Response from the temporary fileserver is $RESPONSE"
           URL=$(echo $RESPONSE | jq -r ".data.url")
-          echo "$URL" > ${{steps.artifact_name.outputs.FILE_NAME}}.url
+          echo "$URL" > ${{steps.artifact_name.outputs.FILENAME}}.url
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{steps.artifact_name.outputs.FILE_NAME}}_url
-          path: ${{steps.artifact_name.outputs.FILE_NAME}}.url
+          name: ${{steps.artifact_name.outputs.FILENAME}}_url
+          path: ${{steps.artifact_name.outputs.FILENAME}}.url
           retention-days: 7
 
   # Notify for renders
@@ -171,13 +171,13 @@ jobs:
         run: |
           FILE="${{matrix.shader}}"
           FULL_NAME=${FILE##*/}
-          FILE_NAME="${FULL_NAME%.*}"
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_OUTPUT
+          FILENAME="${FULL_NAME%.*}"
+          echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
       - name: 'Download Artifacts'
         uses: actions/download-artifact@v3
         with:
-          name: ${{steps.artifact_name.outputs.FILE_NAME}}_url
-          path: ${{steps.artifact_name.outputs.FILE_NAME}}.url
+          name: ${{steps.artifact_name.outputs.FILENAME}}_url
+          path: ${{steps.artifact_name.outputs.FILENAME}}.url
       # Update with version if release
       - name: 'Configure AWS Credentials'
         uses: aws-actions/configure-aws-credentials@v1
@@ -187,12 +187,14 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       # Prepare to send email
       - name: 'Prepare email payload'
+        id: email_prep
         run: |
           export FILENAME_BASE=$(openssl rand -base64 12)
           export FILENAME="${FILENAME_BASE}_message.json"
-          export URL=$(cat ${{steps.artifact_name.outputs.FILE_NAME}}.url)
+          export URL=$(cat ${{steps.artifact_name.outputs.FILENAME}}.url)
           echo "{\"Data\": \"From: ${{secrets.EMAIL_FROM}}\nTo: ${{secrets.EMAIL_TO}}\nSubject: [${{secrets.IG_ACCOUNT}}] New Post \nMIME-Version: 1.0\nContent-type: Multipart/Mixed; boundary=\\\"NextPart\\\"\n\n--NextPart\nContent-Type: text/plain\n\nYou can find the render for the post in here $URL\n\n--NextPart--\"}" > $FILENAME
+          echo "FILENAME=$FILENAME" >> $GITHUB_OUTPUT
       # Send the actual email
       - name: 'Send email payload'
         run: |
-          aws ses send-raw-email --region ${{ secrets.AWS_REGION }} --tags Name=app,Value=appshaders.gonzalohirsch.com --cli-binary-format raw-in-base64-out --raw-message file://$FILENAME
+          aws ses send-raw-email --region ${{ secrets.AWS_REGION }} --tags Name=app,Value=appshaders.gonzalohirsch.com --cli-binary-format raw-in-base64-out --raw-message file://${{steps.email_prep.outputs.FILENAME}}
