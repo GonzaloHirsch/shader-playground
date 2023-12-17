@@ -72,32 +72,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: 'Checking out the code for the library'
-        uses: actions/checkout@v4
-        with:
-          repository: 'GonzaloHirsch/${{env.TARGET_REPO}}'
-          path: ${{env.TARGET_REPO}}
-          fetch-depth: 0
-      - name: 'Setting up Python'
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - name: 'Installing dependencies'
-        run: pip install vispy watchdog glfw Pillow imageio PyQt5
-      - name: 'Installing Linux libraries'
+      - name: 'Building the Docker renderer image'
+        run: docker build --no-cache -t shader_renderer .
+      - name: 'Rendering the shader via Docker'
         run: |
-          sudo apt update && sudo apt upgrade && sudo apt install -y ffmpeg xvfb xorg-dev cmake qt5-qmake build-essential
-          Xvfb :1 -screen 0 1920x1080x16 &
-          export DISPLAY=:1
-      # Possible render platforms eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
-      # Don't work --> linuxfb, vnc, xcb, offscreen, wayland-xcomposite-egl, eglfs, wayland-egl, wayland, wayland-xcomposite-glx (better errors), webgl, minimal
-      # Work -->
-      #export QT_QPA_PLATFORM=eglfs
-      - name: 'Rendering the shader locally'
-        run: |
-          python3 ${{env.TARGET_REPO}}/shadertoy-render.py \
-            --output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M \
-            --vispy_use=egl --duration=30.0 ${{matrix.shader}}
+          docker run --rm -it \
+            -v $PWD/shaders:/shaders \
+            -e BUILD_ARGUMENTS="--output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M --duration=30.0" \
+            -e BUILD_TARGET="${{matrix.shader}}" \
+            shader_renderer
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
