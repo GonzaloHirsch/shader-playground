@@ -149,9 +149,9 @@ jobs:
       - name: 'Upload to temporary server'
         id: upload
         run: |
-          ls
-          cat ${{matrix.shader}}.mp4
-          RESPONSE=$(curl -F "file=@${{matrix.shader}}.mp4" https://tmpfiles.org/api/v1/upload)
+          FILE="${{matrix.shader}}.mp4"
+          FULL_NAME=${FILE##*/}
+          RESPONSE=$(curl -F "file=@$FULL_NAME" https://tmpfiles.org/api/v1/upload)
           echo "Response from the temporary fileserver is $RESPONSE"
           URL=$(echo $RESPONSE | jq -r ".data.url")
           echo "$URL" > ${{steps.artifact_name.outputs.FILENAME}}.url
