@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.4...v3.0.0) (2023-12-17)
+
+
+### chore
+
+* cleanup ([bc674ca](https://github.com/GonzaloHirsch/shader-playground/commit/bc674ca4819452fa823bcf75918b1af9e61f6855))
+
+
+### BREAKING CHANGES
+
+* Working rendering pipeline
+
 ## [2.0.4](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.3...v2.0.4) (2023-12-17)
 
 
