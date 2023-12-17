@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.1...v2.0.2) (2023-12-17)
+
+
+### Bug Fixes
+
+* path to URL ([a18848b](https://github.com/GonzaloHirsch/shader-playground/commit/a18848bb36cc7c7d949cd373357bf3ab9a885900))
+
 ## [2.0.1](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.0...v2.0.1) (2023-12-17)
 
 
