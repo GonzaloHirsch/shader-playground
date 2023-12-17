@@ -74,9 +74,10 @@ jobs:
           fetch-depth: 0
       - name: 'Building the Docker renderer image'
         run: docker build --no-cache -t shader_renderer .
+      # Don't make it tty
       - name: 'Rendering the shader via Docker'
         run: |
-          docker run --rm -it \
+          docker run --rm \
             -v $PWD/shaders:/shaders \
             -e BUILD_ARGUMENTS="--output ${{matrix.shader}}.mp4 --size=800x800 --rate=60 --bitrate=5M --duration=30.0" \
             -e BUILD_TARGET="${{matrix.shader}}" \
