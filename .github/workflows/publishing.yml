@@ -192,7 +192,7 @@ jobs:
       - name: 'Prepare email payload'
         id: email_prep
         run: |
-          export FILENAME_BASE=$(openssl rand -base64 12)
+          export FILENAME_BASE="$RANDOM$RANDOM"
           export FILENAME="${FILENAME_BASE}_message.json"
           export URL=$(cat ${{steps.artifact_name.outputs.FILENAME}}.url)
           echo "{\"Data\": \"From: ${{secrets.EMAIL_FROM}}\nTo: ${{secrets.EMAIL_TO}}\nSubject: [${{secrets.IG_ACCOUNT}}] New Post \nMIME-Version: 1.0\nContent-type: Multipart/Mixed; boundary=\\\"NextPart\\\"\n\n--NextPart\nContent-Type: text/plain\n\nYou can find the render for the post in here $URL\n\n--NextPart--\"}" > $FILENAME
