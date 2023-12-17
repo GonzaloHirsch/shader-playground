@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.0...v2.0.1) (2023-12-17)
+
+
+### Bug Fixes
+
+* random name generator in publishing ([345b71e](https://github.com/GonzaloHirsch/shader-playground/commit/345b71eea7dd4a4c377367fb97b0cf4e2fb1c0b3))
+
 # [2.0.0](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.10...v2.0.0) (2023-12-17)
 
 
