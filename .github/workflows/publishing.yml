@@ -22,24 +22,6 @@ env:
   TARGET_IMAGE: 'shader_renderer:latest'
 
 jobs:
-  # Build the image and just push it to the local artifacts
-  prepareDockerImage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checking out the code'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: 'Building the Docker renderer image'
-        run: docker build --no-cache -t ${{env.TARGET_IMAGE}} .
-      # Uploads the image locally to minimise build times
-      # https://github.com/ishworkh/container-image-artifact-upload
-      - name: Upload image
-        uses: ishworkh/container-image-artifact-upload@v1.0.0
-        with:
-          image: '${{env.TARGET_IMAGE}}'
-          retention_days: '2'
-
   # Gets all the different files
   getChanges:
     runs-on: ubuntu-latest
@@ -76,6 +58,27 @@ jobs:
           fi
       - name: 'Debug outputs'
         run: echo ${{ steps.prep.outputs.FILES }}
+
+  # Build the image and just push it to the local artifacts
+  # Avoid building the image if no files
+  prepareDockerImage:
+    runs-on: ubuntu-latest
+    needs: [getChanges]
+    if: needs.getChanges.outputs.TOTAL_FILES > 0
+    steps:
+      - name: 'Checking out the code'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 'Building the Docker renderer image'
+        run: docker build --no-cache -t ${{env.TARGET_IMAGE}} .
+      # Uploads the image locally to minimise build times
+      # https://github.com/ishworkh/container-image-artifact-upload
+      - name: Upload image
+        uses: ishworkh/container-image-artifact-upload@v1.0.0
+        with:
+          image: '${{env.TARGET_IMAGE}}'
+          retention_days: '2'
 
   # Creates the different renders
   createRenders:
