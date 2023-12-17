@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.2...v2.0.3) (2023-12-17)
+
+
+### Bug Fixes
+
+* artifact download path ([1f56ff8](https://github.com/GonzaloHirsch/shader-playground/commit/1f56ff84f9c5d9b8aa6cce4c429adfbd9c776fe1))
+
 ## [2.0.2](https://github.com/GonzaloHirsch/shader-playground/compare/v2.0.1...v2.0.2) (2023-12-17)
 
 
