@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.10...v2.0.0) (2023-12-17)
+
+
+### Bug Fixes
+
+* publishing order of actions ([4925b3e](https://github.com/GonzaloHirsch/shader-playground/commit/4925b3e9cf44095cf7ccd8e9d9f317ec8a8a503c))
+
+
+### BREAKING CHANGES
+
+* New publishing scheme
+
 ## [1.0.10](https://github.com/GonzaloHirsch/shader-playground/compare/v1.0.9...v1.0.10) (2023-12-16)
 
 
