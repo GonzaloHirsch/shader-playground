@@ -145,7 +145,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{steps.artifact_name.outputs.FILENAME}}
-          path: ${{matrix.shader}}.mp4
+          path: .
       - name: 'Upload to temporary server'
         id: upload
         run: |
